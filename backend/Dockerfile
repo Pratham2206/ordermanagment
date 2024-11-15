@@ -63,7 +63,7 @@ RUN npm install
 
 # Copy all source code into the container
 COPY backend /app/backend
-COPY . .
+# COPY . .
 
 # Set the environment variable to production for Docker
 ENV NODE_ENV=production
