@@ -195,34 +195,35 @@ exports.login = async (req, res) => {
 // Request password reset
 exports.requestPasswordReset = async (req, res) => {
     const { email } = req.body;
-
+  
     if (!email) {
-        return res.status(400).json({ status: 'error', message: 'Please provide an email address.' });
+      return res.status(400).json({ status: 'error', message: 'Please provide an email address.' });
     }
-
+  
     try {
-        const user = await User.findOne({ where: { email } });
-
-        if (!user) {
-            return res.status(404).json({ status: 'error', message: 'Email not found.' });
-        }
-
-        const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '30m' });
-      // Determine the correct client URL based on environment
-      const clientURL = process.env.NODE_ENV === 'production'
-      ? process.env.CLIENT_URL_PROD
-      : process.env.CLIENT_URL_LOCAL;
-
-        const resetLink = `${clientURL}/reset-password/${token}`;
-
-        await sendPasswordResetEmail(email, resetLink);
-        res.status(200).json({ status: 'success', message: 'A password reset link has been sent to your email.' });
+      const user = await User.findOne({ where: { email } });
+  
+      if (!user) {
+        return res.status(404).json({ status: 'error', message: 'Email not found.' });
+      }
+  
+      const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '30m' });
+  
+      // clientURL will be dynamically assigned based on NODE_ENV
+      const clientURL = process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL_PROD : process.env.CLIENT_URL_LOCAL;
+      console.log(`Client URL determined: ${clientURL}`);
+      
+      const resetLink = `${clientURL}/reset-password/${token}`;  // Generates the correct reset link
+      await sendPasswordResetEmail(email, resetLink);
+  
+      res.status(200).json({ status: 'success', message: 'A password reset link has been sent to your email.' });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ status: 'error', message: 'Server error.' });
+      console.error('Error in requestPasswordReset:', error);
+      res.status(500).json({ status: 'error', message: 'Server error.' });
     }
-};
+  };
 
+  
 // Reset password
 exports.resetPassword = async (req, res) => {
     const { token } = req.params;

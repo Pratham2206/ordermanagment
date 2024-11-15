@@ -29,28 +29,27 @@ const adminRoutes = require('./routes/admin');
 const webauthRoutes = require('./routes/webauthRoutes');
 const webuserRoutes = require('./routes/webuserRoutes');
 
-// Determine client URL based on environment
-const clientURL = process.env.NODE_ENV === 'production'
-    ? process.env.CLIENT_URL_PROD
-    : process.env.CLIENT_URL_LOCAL;
+// Client URLs based on environment
+const CLIENT_URL_LOCAL = process.env.CLIENT_URL_LOCAL;
+const CLIENT_URL_PROD = process.env.CLIENT_URL_PROD;
 
+// Automatically set the client URL based on NODE_ENV (handled by Docker/Heroku)
+const clientURL = process.env.NODE_ENV === 'production' ? CLIENT_URL_PROD : CLIENT_URL_LOCAL;
+console.log(`Client URL set to: ${clientURL}`); // Debugging output
 
-// CORS configuration with logging
+// CORS configuration (allow requests from client URL)
 const corsOptions = {
   origin: function (origin, callback) {
-    // Define allowed origins for production and local URLs
-    const allowedOrigins = [process.env.CLIENT_URL_PROD, process.env.CLIENT_URL_LOCAL];
-    console.log(`Incoming request from origin: ${origin}`); // Log the origin of each request
+    const allowedOrigins = [CLIENT_URL_LOCAL, CLIENT_URL_PROD];
     if (!origin || allowedOrigins.includes(origin)) {
-      console.log(`Origin allowed: ${origin}`); // Log if the origin is allowed
       callback(null, true);
     } else {
-      console.log(`Origin denied: ${origin}`); // Log if the origin is denied
       callback(new Error('Not allowed by CORS'));
     }
   },
   optionsSuccessStatus: 200,
 };
+
 // Apply CORS middleware with specific options
 app.use(cors(corsOptions));
 

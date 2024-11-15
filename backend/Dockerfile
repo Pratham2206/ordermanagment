@@ -65,6 +65,9 @@ RUN npm install
 COPY backend /app/backend
 COPY . .
 
+# Set the environment variable to production for Docker
+ENV NODE_ENV=production
+
 #set backend directory as the working directory to match file paths in the app
 WORKDIR /app/backend
 
