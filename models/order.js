@@ -32,6 +32,14 @@ const Orders = sequelize.define('Orders', {
       type: DataTypes.STRING,
       allowNull: false,
   },
+senderAddress: {
+    type: DataTypes.STRING,
+    allowNull: false,
+},
+receiverAddress: {
+    type: DataTypes.STRING,
+    allowNull: false,
+},
   content: {
       type: DataTypes.STRING,
   },

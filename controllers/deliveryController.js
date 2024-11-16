@@ -81,6 +81,8 @@ exports.assignOrder = async (req, res) => {
       createdAt: order.createdAt,
       receiverPhonenumber: order.receiverPhonenumber,
       receiverName: order.receiverName,
+      senderAddress:order.senderAddress,
+      receiverAddress:order.receiverAddress,
       deliveryInstructions: order.deliveryInstructions,
       otp: otp,
     });

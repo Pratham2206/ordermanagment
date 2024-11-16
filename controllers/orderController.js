@@ -25,6 +25,8 @@ const submitOrder = async (req, res) => {
         deliveryInstructions,
         receiverPhonenumber,
         receiverName,
+        senderAddress,
+        receiverAddress,
         pickupDate,
         pickupTime
     } = req.body;
@@ -42,6 +44,8 @@ const submitOrder = async (req, res) => {
                 receiverName,
                 content,
                 weight,
+                senderAddress,
+                receiverAddress,
             });
         }
         if (serviceType === "Delivery Now") {
@@ -55,6 +59,8 @@ const submitOrder = async (req, res) => {
                 content,
                 deliveryInstructions,
                 receiverPhonenumber,
+                senderAddress,
+                receiverAddress,
                 receiverName,
                 status: 'pending',
             });
@@ -76,6 +82,8 @@ const submitOrder = async (req, res) => {
                 deliveryInstructions,
                 receiverPhonenumber,
                 receiverName,
+                senderAddress,
+                receiverAddress,
                 pickupDate,
                 pickupTime,
                 status: 'pending',
@@ -124,6 +132,8 @@ const userSubmitOrder = async (req, res) => {
         deliveryInstructions,
         receiverPhonenumber,
         receiverName,
+        senderAddress,
+        receiverAddress,
         pickupDate,
         pickupTime,
         razorpay_payment_id,
@@ -153,6 +163,8 @@ const userSubmitOrder = async (req, res) => {
                 receiverName,
                 content,
                 weight,
+                senderAddress,
+                receiverAddress,
             });
         }
 
@@ -169,6 +181,8 @@ const userSubmitOrder = async (req, res) => {
             deliveryInstructions,
             receiverPhonenumber,
             receiverName,
+            senderAddress,
+            receiverAddress,
             razorpay_payment_id,
             razorpay_order_id,
             razorpay_signature,

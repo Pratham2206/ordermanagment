@@ -44,13 +44,21 @@ const AssignedOrder = sequelize.define('AssignedOrder', {
     allowNull: false,
   },
   pickupAddress: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   dropAddress: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
   },
+  senderAddress: {
+    type: DataTypes.STRING,
+    allowNull: false,
+},
+receiverAddress: {
+    type: DataTypes.STRING,
+    allowNull: false,
+},
   content: {
     type: DataTypes.TEXT,
     allowNull: false,

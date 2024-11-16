@@ -53,23 +53,23 @@
 FROM node:14
 
 # Create and set the working directory inside the container
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copy package.json and package-lock.json to install dependencies
-COPY backend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy all source code into the container
-COPY backend /app/backend
-# COPY . .
+# COPY backend /app/backend
+COPY . .
 
 # Set the environment variable to production for Docker
 ENV NODE_ENV=production
 
 #set backend directory as the working directory to match file paths in the app
-WORKDIR /app/backend
+WORKDIR /app
 
 # Expose the port your app runs on (adjust if necessary)
 EXPOSE 5000
