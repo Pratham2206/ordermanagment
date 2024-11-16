@@ -10,7 +10,6 @@ const razorpay = new Razorpay({
     key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
-
 // Function to handle order submission
 const submitOrder = async (req, res) => {
     const {
@@ -141,7 +140,6 @@ const userSubmitOrder = async (req, res) => {
         razorpay_signature,
         amount,
     } = req.body;
-
     try {
         // Verify Razorpay payment
         const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET);

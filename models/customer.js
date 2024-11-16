@@ -49,6 +49,14 @@ const Customer = sequelize.define('Customer', {
     receiverPhonenumber: {
         type: DataTypes.STRING(10),
         allowNull: false,
+    },
+    senderAddress: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    receiverAddress: {
+        type: DataTypes.STRING,
+        allowNull: false,
     },   
 }, 
 {
